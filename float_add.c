@@ -62,7 +62,9 @@ float float_add(float a,float b)
 	p6 = (int *)&mantissa3;
 	n = (sign3 << 31) | (exp3 << 23) | mantissa3;
 	printf("%d\n",n);
-	return n;
+	float *p;
+	p = (float *)&n;
+	return *p;
 	
 	
 	
