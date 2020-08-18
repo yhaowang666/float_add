@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include"float_add.h"
-int main()
+int main(int argc, char *argv[])
 {
-    float a = 1.23,b = 2.56;
-    float c = float_add(a,b);
+    float a = 1.23,b = 2.34;
+    float c = (float)float_add(a,b);
     
     printf("%f+%f = %f\n",a,b,c);
 }
