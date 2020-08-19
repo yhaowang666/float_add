@@ -4,7 +4,7 @@
 #include "float_add.h"
 float float_add(float a,float b)
 {
-	int *p1,*p2,*p3;
+	int *p1,*p2;
 	int sign1,sign2,sign3,exp1,exp2,exp3,mantissa1,mantissa2,mantissa3;
 	
 	p1 = (int *)&a;
@@ -23,29 +23,29 @@ float float_add(float a,float b)
 	printf("%d,%d,%d\n",sign2,exp2,mantissa2);
 	
 	//return a+b;
-	int x,y;
+	long x,y;
 	x = mantissa1 * pow(2,exp1-127)*(2*sign1+1);
 	y = mantissa2 * pow(2,exp2-127)*(2*sign2+1);
-	printf("x = %d,y = %d\n",x,y);
+	printf("x = %ld,y = %ld\n",x,y);
 	//return a+b;
 	
 	//得到后23位
 	exp3 = 127;
-	int m = x+y ;
-	p3 = (int *)&m;
-	printf("%d\n",m);
+	long m = x+y , *p3;
+	p3 = (long *)&m;
+	printf("m = %ld\n",m);
 	printf("************\n");
 	if (abs(m)<pow(2,23)){
 		while(abs(m)<pow(2,23)){
 			m = (*p3) << 1;
 			exp3--;
-			printf("%d\n",m);	
+			printf("%ld\n",m);	
 		}
 	}else{
 		while(abs(m)>=pow(2,24)){
 			m = (*p3) >> 1;
 			exp3++;
-			printf("%d\n",m);
+			printf("%ld\n",m);
 		}	
 	}
 	printf("************\n");
