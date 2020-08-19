@@ -24,16 +24,17 @@ float float_add(float a,float b)
 	
 	//return a+b;
 	int x,y;
-	x = mantissa1 * pow(2,exp1-127)*(-2*sign1+1);
-	y = mantissa2 * pow(2,exp2-127)*(-2*sign2+1);
-	//printf("%d,%d\n",x,y);
+	x = mantissa1 * pow(2,exp1-127)*(2*sign1+1);
+	y = mantissa2 * pow(2,exp2-127)*(2*sign2+1);
+	printf("x = %d,y = %d\n",x,y);
 	//return a+b;
 	
 	//得到后23位
 	exp3 = 127;
 	int m = x+y ;
 	p3 = (int *)&m;
-	printf("%d\n",abs(m));
+	printf("%d\n",m);
+	printf("************\n");
 	if (abs(m)<pow(2,23)){
 		while(abs(m)<pow(2,23)){
 			m = (*p3) << 1;
@@ -47,11 +48,12 @@ float float_add(float a,float b)
 			printf("%d\n",m);
 		}	
 	}
-	mantissa3 = m & (0x7FFFFF);
+	printf("************\n");
+	mantissa3 = abs(m) & (0x7FFFFF);//添加abs去除m为负数对结果的影响
 	printf("%d,%d\n",mantissa3,exp3);
 	
 	//得到符号位
-	if(m < 0) sign3 = 1;
+	if(m < 0) sign3 = -1;
 	else sign3 = 0;
 	printf("%d\n",sign3);
 	
